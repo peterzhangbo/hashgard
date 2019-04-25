@@ -113,13 +113,11 @@ hashgardcli issue create [name][symbol][total-supply][flags]
 
 持有该通证的所有用户或者Owen可以燃烧自己的可用余额。燃烧后通证总量减少。
 
-Owen 销毁受--burn-Owen-off状态控制。
-
-用户销毁受-burn-handlers-off状态控制。
+Owen 销毁受--burn-Owen-off状态控制。用户销毁受-burn-handlers-off状态控制。
 
 > Message
 >
-> - error：Burn-  is disabled.
+> - error：Burn is disabled.
 >
 > - 报错：燃烧功能被禁用。
 >
@@ -165,29 +163,23 @@ Owen 销毁受--burn-Owen-off状态控制。
 > Message
 >
 > - error：You are not the owen of the token.
->
 > - 报错：你不是该通证的Owen。
-
 > - error：freezeAccount is disabled.
->
 > - 报错：冻结账户功能被禁用。
->
 > - error：freezeAccount does not exist.
->
 > - 报错：冻结账户不存在。
->
 > - error：starting time.
 > - 报错：冻结开始时间不正确。
->
 > - error：end time.
 > - 报错：冻结结束时间不正确。
->
 > - error：Start time cannot be less than end time.
 > - 报错：冻结开始时间必须早于结束时间。
 
 ```bash
 
 ```
+
+
 
 
 
@@ -259,7 +251,7 @@ Owen增发通证至自己账户。增发数量+现有发行数量不能超过2^6
 >
 > - error：You are not the owen of the token.
 > - 报错：你不是该通证的Owen。
-> - error：mint  is disabled.
+> - error：minting  is disabled.
 > - 报错：增发功能被禁用。
 > - error：total-supply exceeds the upper limit.
 > - 报错：供应总量超出发行上限。
