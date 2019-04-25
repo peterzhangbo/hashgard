@@ -6,17 +6,19 @@
 
 ### 摘要
 
-标准同质化Token，该版本提供标准的转移token创建、转移、以及适合金融企业的高级管理功能：例如增发、管理权限转移、冻结/解冻账户、销毁代币、强制转移等功能。
+标准同质化Token，该版本提供标准的转移token创建、转移、以及适合金融企业的高级管理功能：例如增发、冻结/解冻账户、销毁代币、强制转移等功能。
 
 
 
 ### 使用方法
 
-```shell
+```bash
 hashgardcli issue create [name][symbol][total-supply][flags] 
 ```
 
 
+
+### 释义
 
 #### name
 
@@ -24,8 +26,8 @@ hashgardcli issue create [name][symbol][total-supply][flags]
 
 > Message
 >
-> - error：Name encoding only supports utf-8.    
-> - 报错：Name 编码格式不正确。
+> - error：name encoding only supports utf-8.    
+> - 报错：name 编码格式不正确。
 > - error：The length of the name is between 3 and 32. 
 > - 报错：name字符长度应该在3～32。
 > - error：The name cannot be empty.  
@@ -63,9 +65,9 @@ hashgardcli issue create [name][symbol][total-supply][flags]
 
 #### describe-file
 
-发行通证可用支持描述文件，格式支持json文件，大小不能超过？kb。支持后期修改。[查看后期修改命令](./cli/hashgardcli/issue/describe.md)
+发行通证可用支持描述文件，格式支持json文件，大小不能超过512kb。支持后期修改。[查看后期修改命令](./cli/hashgardcli/issue/describe.md)
 
-- organization 组织机构或个人名称 ，支持格式UTF-8。
+- organization 组织机构或个人名称 。
 
 - Logo  通证项目图标或项目图标，仅支持网址链接。
 - website  发行方官方的网站地址。
@@ -73,7 +75,7 @@ hashgardcli issue create [name][symbol][total-supply][flags]
 
 #### 模版
 
-```
+```json
 {
     "organization":"Hashgard",
     "website":"https://www.hashgard.com",
@@ -109,18 +111,22 @@ hashgardcli issue create [name][symbol][total-supply][flags]
 
 ### burn
 
-持有该通证的所有用户可以燃烧自己的可用余额。燃烧后通证总量减少。
+持有该通证的所有用户或者Owen可以燃烧自己的可用余额。燃烧后通证总量减少。
+
+Owen 销毁受--burn-Owen-off状态控制。
+
+用户销毁受-burn-handlers-off状态控制。
 
 > Message
 >
-> - error：Burn  is disabled.
+> - error：Burn-  is disabled.
 >
 > - 报错：燃烧功能被禁用。
 >
 > - error：The balance is less than the amount burned.
 > - 报错：余额小于燃烧数量。
 
-```
+```bash
 
 ```
 
@@ -128,7 +134,7 @@ hashgardcli issue create [name][symbol][total-supply][flags]
 
 ### burn-from
 
-该通证的Owen可以销毁其他正常用户持有该通证的可用余额。
+该通证的Owen可以销毁其他正常用户持有该通证的可用余额。燃烧后通证总量减少。该命令受到--burn-from-off状态控制。
 
 >Message
 >
@@ -144,41 +150,17 @@ hashgardcli issue create [name][symbol][total-supply][flags]
 >
 >- 报错：燃烧地址不存在。
 
-```
-hashgardcli 
-```
-
-
-
-### mint
-
-Owen增发通证至自己账户。增发数量+现有发行数量不能超过2^64-1。增发数量仅支持正整数。
-
-> Message
->
-> - error：You are not the owen of the token.
->
-> - 报错：你不是该通证的Owen。
-> - error：mint  is disabled.
-> - 报错：增发功能被禁用。
->
-> - error：total-supply exceeds the upper limit.
-> - 报错：供应总量超出发行上限。
->
-> - error：mint quantity must be a positive integer.
-> - 报错：增发数量必须为正整数。
+```bash
 
 ```
 
-```
+
 
 
 
 ### freezeAccount
 
-可以冻结用户该通证转入、转出功能。并带有时间参数。
-
-- time仅支持时间戳格式，开始时间不能晚余结束时间。开始时间早于交易执行时间。 
+可以冻结用户该通证转入、转出功能。并带有时间参数。time仅支持时间戳格式，开始时间不能晚余结束时间。开始时间早于交易执行时间。 该命令受到freezeAccount-off状态控制。
 
 > Message
 >
@@ -203,7 +185,7 @@ Owen增发通证至自己账户。增发数量+现有发行数量不能超过2^6
 > - error：Start time cannot be less than end time.
 > - 报错：冻结开始时间必须早于结束时间。
 
-```
+```bash
 
 ```
 
@@ -211,7 +193,7 @@ Owen增发通证至自己账户。增发数量+现有发行数量不能超过2^6
 
 ### unfreezeAccount
 
-解冻用户的账户转入、转出的状态。
+解冻用户的账户转入、转出的状态。 该命令受到freezeAccount-off状态控制。
 
 >Message
 >
@@ -231,7 +213,7 @@ Owen增发通证至自己账户。增发数量+现有发行数量不能超过2^6
 >
 >警告：账户没有冻结状态
 
-```
+```bash
 
 ```
 
@@ -239,7 +221,7 @@ Owen增发通证至自己账户。增发数量+现有发行数量不能超过2^6
 
 ## forced-transfer
 
-通证的Owen强制转移用户该通证至其他用户地址。
+通证的Owen强制转移用户该通证至其他用户地址。 该命令受到forced-transfer-off状态控制。
 
 > Message
 >
@@ -263,7 +245,28 @@ Owen增发通证至自己账户。增发数量+现有发行数量不能超过2^6
 >
 > 报错：余额不足
 
+```bash
+
 ```
+
+
+
+### minting
+
+Owen增发通证至自己账户。增发数量+现有发行数量不能超过2^64-1。增发数量仅支持正整数。该命令受到--minting-finished状态控制。
+
+> Message
+>
+> - error：You are not the owen of the token.
+> - 报错：你不是该通证的Owen。
+> - error：mint  is disabled.
+> - 报错：增发功能被禁用。
+> - error：total-supply exceeds the upper limit.
+> - 报错：供应总量超出发行上限。
+> - error：mint quantity must be a positive integer.
+> - 报错：增发数量必须为正整数。
+
+```bash
 
 ```
 
@@ -271,15 +274,15 @@ Owen增发通证至自己账户。增发数量+现有发行数量不能超过2^6
 
 ### 例子
 
-```
-hashgardcli issue create foocoin FOO 100000000 --from {you_wallet_address} -o=json
+```bash
+hashgardcli issue create foocoin FOO 100000000 --from {you_wallet_address/name} -o=json
 ```
 
 进行本项操作需要您有Gard来进行支付矿工打包费用。如测试网络环境请领取测试代币。[如何领取](../cli/hashgard/Faucet.md)
 
 进行上述操作后会需要您使用您输入当前地址钱包的密码进行发行通证操作。
 
-```
+```json
 {
  "height": "3394",
  "txhash": "81D4B2054F741E901BE5A540DDA37BF53D1DEA16C94BF9E4BBDB1D1CD548DFA1",
@@ -310,15 +313,17 @@ hashgardcli issue create foocoin FOO 100000000 --from {you_wallet_address} -o=js
 }
 ```
 
+
+
 查询自己的账号
 
-```shell
+```bash
 hashgardcli bank account {you_wallet_address}
 ```
 
 你将会看到你的持币列表里多了一个形如“币名（issue-id）”特殊名称的币。后续对该币的操作请使用issue-id的值来进行，包括进行转账操作，要转的币也请使用该issue-id。
 
-```
+```json
 {
  "type": "auth/Account",
  "value": {
