@@ -13,10 +13,8 @@
 ### 使用方法
 
 ```shell
-hashgardcli issue create [name][symbol][total-supply][describe-file][flags] 
+hashgardcli issue create [name][symbol][total-supply][flags] 
 ```
-
-其中[name] [symbol] [total-supply] [organization]为必填字段 [remarks]为选填字段。
 
 
 
@@ -65,7 +63,7 @@ hashgardcli issue create [name][symbol][total-supply][describe-file][flags]
 
 #### describe-file
 
-格式支持json文件，大小不能超过？kb。支持后期修改。[查看后期修改命令](./cli/hashgardcli/issue/describe.md)
+发行通证可用支持描述文件，格式支持json文件，大小不能超过？kb。支持后期修改。[查看后期修改命令](./cli/hashgardcli/issue/describe.md)
 
 - organization 组织机构或个人名称 ，支持格式UTF-8。
 
@@ -86,8 +84,8 @@ hashgardcli issue create [name][symbol][total-supply][describe-file][flags]
 
 >Message
 >
->- error：file size cannot exceed ？kb.
->- 报错：file文件大小不能大于？kb。
+>- error：file size cannot exceed 512kb.
+>- 报错：file文件大小不能大于512kb。
 >- error：the file must be json。
 >- 报错：文件格式为json。
 
@@ -95,14 +93,15 @@ hashgardcli issue create [name][symbol][total-supply][describe-file][flags]
 
 ###  Flags
 
-| 名称                | 类型   | 是否必须 | 默认值 | 描述                                               |
-| ------------------- | ------ | :------: | ------ | -------------------------------------------------- |
-| --decimals          | int    |    否    | 18     | （可选）代币精度，默认18位，最大18位               |
-| --burn-off          | string |    否    | false  | （可选）是否关闭所有用户销毁自己通证               |
-| --burn-from-off     | bool   |    否    | false  | （可选）是否关闭Owner可销毁任意账号下该代币的功能  |
-| --minting-finished  | bool   |    否    | false  | （可选）是否关闭Owen增发权限                       |
-| freezeAccount-off   | bool   |    否    | false  | （可选）是否关闭Owen冻结解冻用户该通证转入转出功能 |
-| forced-transfer-off | bool   |    否    | false  | （可选）是否关闭Owen强制用户该通证可用余额的权利   |
+| 名称                | 类型 | 是否必须 | 默认值 | 描述                                               |
+| ------------------- | ---- | :------: | ------ | -------------------------------------------------- |
+| --decimals          | int  |    否    | 18     | （可选）代币精度，默认18位，最大18位               |
+| --burn-Owen-off     | bool |    否    | false  | （可选）是否关闭Owen销毁自己通证                   |
+| -burn-handlers-off  | bool |    否    | false  | （可选）是否关闭用户销毁自己通证                   |
+| --burn-from-off     | bool |    否    | false  | （可选）是否关闭Owner可销毁任意账号下该代币的功能  |
+| freezeAccount-off   | bool |    否    | false  | （可选）是否关闭Owen冻结解冻用户该通证转入转出功能 |
+| forced-transfer-off | bool |    否    | false  | （可选）是否关闭Owen强制用户该通证可用余额的权利   |
+| --minting-finished  | bool |    否    | false  | （可选）是否关闭Owen增发权限                       |
 
 以上flags 为不可逆操作，一旦关闭将无法开启。
 
@@ -267,8 +266,6 @@ Owen增发通证至自己账户。增发数量+现有发行数量不能超过2^6
 ```
 
 ```
-
-
 
 
 
