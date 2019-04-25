@@ -13,7 +13,7 @@
 ### 使用方法
 
 ```shell
-hashgardcli issue create [name] [symbol] [total-supply] [organization][remarks][flags] 
+hashgardcli issue create [name][symbol][total-supply][describe-file][flags] 
 ```
 
 其中[name] [symbol] [total-supply] [organization]为必填字段 [remarks]为选填字段。
@@ -63,36 +63,33 @@ hashgardcli issue create [name] [symbol] [total-supply] [organization][remarks][
 
 
 
-#### organization
+#### describe-file
 
-组织机构或个人名称 。支持格式UTF-8、长度小于120字符。必填、不可修改。
+格式支持json文件，大小不能超过？kb。支持后期修改。[查看后期修改命令](./cli/hashgardcli/issue/describe.md)
 
->Message
->
->- error：organization encoding only supports utf-8.
->- 报错：organization编码仅支持UTF-8。
->
->- error：The length of the organization is less than 120.
->- 报错：organization 字符长度应该小于120。
->- error：The organization cannot be empty.
->- 报错：organization 不能为空。
+- organization 组织机构或个人名称 。支持格式UTF-8、长度小于120字符。必填、不可修改。
 
-
-
-#### remarks
-
-该字段为发行者提供自定义的信息，可不填、可修改。 总长度小于1000字符。包括建议字段：
-
-- icon  通证项目图标或项目图标，仅支持网址链接，
-
-- url  发行方官方的网站地址
+- Logo  通证项目图标或项目图标，仅支持网址链接，
+- website  发行方官方的网站地址
 - description  对于该项目的简单描述。
-- 格式：todo
+
+#### 模版
+
+```
+{
+    "organization":"Hashgard",
+    "website":"https://www.hashgard.com",
+    "logo":"https://cdn.hashgard.com/static/logo.2d949f3d.png",
+    "description":"新一代金融公有链" 
+}
+```
 
 >Message
 >
->- error：remarks size cannot exceed ？kb.
->- 报错：remarks文件大小不能大于？kb。
+>- error：file size cannot exceed ？kb.
+>- 报错：file文件大小不能大于？kb。
+>- error：the file must be json。
+>- 报错：文件格式为json。
 
 
 
