@@ -1,4 +1,4 @@
-## HRC-10 TOKEN发行协议
+## HRC-10 通证发行协议（issue模块）
 
 ### 简述
 
@@ -6,7 +6,7 @@
 
 ### 摘要
 
-标准同质化Token，该版本提供标准的转移token创建、转移、以及适合金融企业的高级管理功能：例如增发、冻结/解冻账户、销毁代币、强制转移等功能。
+标准同质化Token，该协议提供标准的token创建、转移、以及适合金融企业的高级管理功能：例如增发、冻结/解冻账户、销毁代币、强制转移等功能。
 
 
 
@@ -136,9 +136,9 @@ Owen 销毁受--burn-Owen-off状态控制。用户销毁受-burn-handlers-off状
 
 >Message
 >
->- error：You are not the owen of the token.
+>- error：Owner mismatch with coin .
 >
->- 报错：你不是该通证的Owen。
+>- 报错：与通证发行着不匹配。
 >- error：Burn-from  is disabled.
 >- 报错：燃烧用户余额功能被禁用。
 >
