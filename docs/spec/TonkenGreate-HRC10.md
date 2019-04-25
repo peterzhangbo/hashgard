@@ -13,7 +13,7 @@
 ### 使用方法
 
 ```shell
-hashgardcli issue create [name][symbol][total-supply][describe-file][flags] 
+hashgardcli issue create [name] [symbol] [total-supply] [organization][remarks][flags] 
 ```
 
 其中[name] [symbol] [total-supply] [organization]为必填字段 [remarks]为选填字段。
@@ -67,7 +67,7 @@ hashgardcli issue create [name][symbol][total-supply][describe-file][flags]
 
 格式支持json文件，大小不能超过？kb。支持后期修改。[查看后期修改命令](./cli/hashgardcli/issue/describe.md)
 
-- organization 组织机构或个人名称 。支持格式UTF-8、长度小于120字符。必填、不可修改。
+- organization 组织机构或个人名称 。支持格式UTF-8、长度小于120字符。
 
 - Logo  通证项目图标或项目图标，仅支持网址链接，
 - website  发行方官方的网站地址
