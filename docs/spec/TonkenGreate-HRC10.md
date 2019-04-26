@@ -52,7 +52,7 @@ hashgardcli issue create [name][symbol][total-supply][flags]
 
 #### total-supply
 
-通证发行总量，仅支持正整数。最大不超过2^64-1。必填、数量会因为增发命令而改变。
+通证发行总量，仅支持正整数。最大不超过2^64-1。必填、数量发行后受到burn和mint操作而发生改变。
 
 >Message
 >
@@ -63,49 +63,20 @@ hashgardcli issue create [name][symbol][total-supply][flags]
 
 
 
-#### describe-file
-
-发行通证可用支持描述文件，格式支持json文件，大小不能超过1024Bye。支持后期修改。[查看后期修改命令](./cli/hashgardcli/issue/describe.md)
-
-- organization 组织机构或个人名称 。
-
-- Logo  通证项目图标或项目图标，仅支持网址链接。
-- website  发行方官方的网站地址。
-- description  对于该项目的简单描述。
-
-#### 模版
-
-```json
-{
-    "organization":"Hashgard",
-    "website":"https://www.hashgard.com",
-    "logo":"https://cdn.hashgard.com/static/logo.2d949f3d.png",
-    "description":"新一代金融公有链" 
-}
-```
-
->Message
->
->- error：file size cannot exceed 1024 byte.
->- 报错：file文件大小不能大于1024byte。
->- error：the file must be json。
->- 报错：文件格式为json。
-
 
 
 ###  Flags
 
-| 名称                | 类型 | 是否必须 | 默认值 | 描述                                               |
-| ------------------- | ---- | :------: | ------ | -------------------------------------------------- |
-| --decimals          | int  |    否    | 18     | （可选）代币精度，默认18位，最大18位               |
-| --burn-Owen-off     | bool |    否    | false  | （可选）是否关闭Owen销毁自己通证                   |
-| -burn-handlers-off  | bool |    否    | false  | （可选）是否关闭用户销毁自己通证                   |
-| --burn-from-off     | bool |    否    | false  | （可选）是否关闭Owner可销毁任意账号下该代币的功能  |
-| freezeAccount-off   | bool |    否    | false  | （可选）是否关闭Owen冻结解冻用户该通证转入转出功能 |
-| forced-transfer-off | bool |    否    | false  | （可选）是否关闭Owen强制用户该通证可用余额的权利   |
-| --minting-finished  | bool |    否    | false  | （可选）是否关闭Owen增发权限                       |
+| 名称               | 类型 | 是否必须 | 默认值 | 描述                                               |
+| ------------------ | ---- | :------: | ------ | -------------------------------------------------- |
+| --decimals         | int  |    否    | 18     | （可选）代币精度，默认18位，最大18位               |
+| --burn-Owen-off    | bool |    否    | false  | （可选）是否关闭Owen销毁自己通证                   |
+| -burn-handlers-off | bool |    否    | false  | （可选）是否关闭用户销毁自己通证                   |
+| --burn-from-off    | bool |    否    | false  | （可选）是否关闭Owner可销毁任意账号下该代币的功能  |
+| freezeAccount-off  | bool |    否    | false  | （可选）是否关闭Owen冻结解冻用户该通证转入转出功能 |
+| --minting-finished | bool |    否    | false  | （可选）是否关闭Owen增发权限                       |
 
-以上flags 为不可逆操作，一旦关闭将无法开启。
+默认不设置为开启状态，操作不可逆，一旦设定或关闭将无法修改。
 
 
 
@@ -213,7 +184,7 @@ Owen 销毁受--burn-Owen-off状态控制。用户销毁受-burn-handlers-off状
 
 
 
-### minting
+### minti
 
 Owen增发通证至自己账户。增发数量+现有发行数量不能超过2^64-1。增发数量仅支持正整数。该命令受到--minting-finished状态控制。
 
@@ -237,7 +208,7 @@ Owen增发通证至自己账户。增发数量+现有发行数量不能超过2^6
 ### 例子
 
 ```bash
-hashgardcli issue create foocoin FOO 100000000 --from foo -o=json
+hashgardcli issue create foocoin FOO 100000000 --from=foo -o=json
 ```
 
 进行本项操作需要您有Gard来进行支付矿工打包费用。如测试网络环境请领取测试代币。[如何领取](../cli/hashgard/Faucet.md)
@@ -309,3 +280,33 @@ hashgardcli bank account foo
  }
 }
 ```
+
+
+
+#### describe-file
+
+发行通证可用支持描述文件，格式支持json文件，大小不能超过1024字节。
+
+- organization 组织机构或个人名称 。
+- Logo  通证项目图标或项目图标，仅支持网址链接。
+- website  发行方官方的网站地址。
+- description  对于该项目的简单描述。
+
+#### 模版
+
+```json
+{
+    "organization":"Hashgard",
+    "website":"https://www.hashgard.com",
+    "logo":"https://cdn.hashgard.com/static/logo.2d949f3d.png",
+    "description":"新一代金融公有链" 
+}
+```
+
+> Message
+>
+> - error：file size cannot exceed 1024 byte.
+> - 报错：file文件大小不能大于1024byte。
+> - error：the file must be json。
+> - 报错：文件格式为json。
+
