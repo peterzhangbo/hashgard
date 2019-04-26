@@ -65,7 +65,7 @@ hashgardcli issue create [name][symbol][total-supply][flags]
 
 #### describe-file
 
-发行通证可用支持描述文件，格式支持json文件，大小不能超过512kb。支持后期修改。[查看后期修改命令](./cli/hashgardcli/issue/describe.md)
+发行通证可用支持描述文件，格式支持json文件，大小不能超过1024Bye。支持后期修改。[查看后期修改命令](./cli/hashgardcli/issue/describe.md)
 
 - organization 组织机构或个人名称 。
 
@@ -86,8 +86,8 @@ hashgardcli issue create [name][symbol][total-supply][flags]
 
 >Message
 >
->- error：file size cannot exceed 512kb.
->- 报错：file文件大小不能大于512kb。
+>- error：file size cannot exceed 1024 byte.
+>- 报错：file文件大小不能大于1024byte。
 >- error：the file must be json。
 >- 报错：文件格式为json。
 
@@ -125,7 +125,7 @@ Owen 销毁受--burn-Owen-off状态控制。用户销毁受-burn-handlers-off状
 > - 报错：余额小于燃烧数量。
 
 ```bash
-
+ hashgardcli issue burn [issue-id] [amount] [flags]
 ```
 
 
@@ -211,36 +211,6 @@ Owen 销毁受--burn-Owen-off状态控制。用户销毁受-burn-handlers-off状
 
 
 
-## forced-transfer
-
-通证的Owen强制转移用户该通证至其他用户地址。 该命令受到forced-transfer-off状态控制。
-
-> Message
->
-> error：You are not the owen of the token.
->
-> 报错：你不是该通证的Owen。
->
-> error：forced-transfer is disable.
->
-> 报错：强制转移被禁用。
->
-> error：from  address does not exist.
->
-> 报错：转出地址不存在。
->
-> error：to  address does not exist.
->
-> 报错：转入地址不存在。
->
-> error： balance is insufficient.
->
-> 报错：余额不足
-
-```bash
-
-```
-
 
 
 ### minting
@@ -267,7 +237,7 @@ Owen增发通证至自己账户。增发数量+现有发行数量不能超过2^6
 ### 例子
 
 ```bash
-hashgardcli issue create foocoin FOO 100000000 --from {you_wallet_address/name} -o=json
+hashgardcli issue create foocoin FOO 100000000 --from foo -o=json
 ```
 
 进行本项操作需要您有Gard来进行支付矿工打包费用。如测试网络环境请领取测试代币。[如何领取](../cli/hashgard/Faucet.md)
@@ -310,7 +280,7 @@ hashgardcli issue create foocoin FOO 100000000 --from {you_wallet_address/name} 
 查询自己的账号
 
 ```bash
-hashgardcli bank account {you_wallet_address}
+hashgardcli bank account foo
 ```
 
 你将会看到你的持币列表里多了一个形如“币名（issue-id）”特殊名称的币。后续对该币的操作请使用issue-id的值来进行，包括进行转账操作，要转的币也请使用该issue-id。
